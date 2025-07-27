@@ -43,6 +43,7 @@ function App() {
   const [showChart, setShowChart] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(0);
+  const [advancedEnabled, setAdvancedEnabled] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -236,55 +237,75 @@ function App() {
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="height">Height (inches):</label>
-                <input
-                  type="number"
-                  id="height"
-                  name="height"
-                  value={personData.height || ""}
-                  onChange={handleInputChange}
-                  min="20"
-                  max="100"
-                  placeholder="e.g., 70 for 5'10&quot;"
-                />
+              <div className="beta-toggle">
+                <label className="toggle-label">
+                  <input
+                    type="checkbox"
+                    checked={advancedEnabled}
+                    onChange={(e) => setAdvancedEnabled(e.target.checked)}
+                    className="toggle-input"
+                  />
+                  <span className="toggle-slider"></span>
+                  <span className="toggle-text">Advanced Mode</span>
+                </label>
+                <p className="beta-description">
+                  Enable advanced parameters for enhanced analysis
+                </p>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="weight">Weight (lbs):</label>
-                <input
-                  type="number"
-                  id="weight"
-                  name="weight"
-                  value={personData.weight || ""}
-                  onChange={handleInputChange}
-                  min="50"
-                  max="600"
-                  placeholder="e.g., 150"
-                />
-              </div>
+              {advancedEnabled && (
+                <>
+                  <div className="form-group">
+                    <label htmlFor="height">Height (inches):</label>
+                    <input
+                      type="number"
+                      id="height"
+                      name="height"
+                      value={personData.height || ""}
+                      onChange={handleInputChange}
+                      min="20"
+                      max="100"
+                      placeholder="e.g., 70 for 5'10&quot;"
+                    />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="occupation">Occupation:</label>
-                <input
-                  type="text"
-                  id="occupation"
-                  name="occupation"
-                  value={personData.occupation}
-                  onChange={handleInputChange}
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="weight">Weight (lbs):</label>
+                    <input
+                      type="number"
+                      id="weight"
+                      name="weight"
+                      value={personData.weight || ""}
+                      onChange={handleInputChange}
+                      min="50"
+                      max="600"
+                      placeholder="e.g., 150"
+                    />
+                  </div>
 
-              <div className="form-group">
-                <label htmlFor="hobbies">Hobbies/Interests:</label>
-                <input
-                  type="text"
-                  id="hobbies"
-                  name="hobbies"
-                  value={personData.hobbies}
-                  onChange={handleInputChange}
-                />
-              </div>
+                  <div className="form-group">
+                    <label htmlFor="occupation">Occupation:</label>
+                    <input
+                      type="text"
+                      id="occupation"
+                      name="occupation"
+                      value={personData.occupation}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="hobbies">Hobbies/Interests:</label>
+                    <input
+                      type="text"
+                      id="hobbies"
+                      name="hobbies"
+                      value={personData.hobbies}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </>
+              )}
 
               <div className="disclaimer">
                 <p>
