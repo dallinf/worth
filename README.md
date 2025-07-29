@@ -44,3 +44,29 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Setup on Synology Docker Container
+
+[Reference](https://hamedweb.co.nz/unleash-your-react-js-apps-power-self-hosting-on-your-synology-nas/)
+
+1. Run container with nodejs image
+2. Open terminal in the container
+3. Create bash
+4. Go to /usr/local/bin
+5. Edit docker-entrypoint.sh with nano. `apt update && apt install nano`
+6. Add these instructions
+
+```
+#!/bin/sh
+set -e
+
+cd /usr/local/app
+git pull
+
+npm cache clean --force
+npm ci
+npm run build
+npm start
+```
+
+7. Save and restart
